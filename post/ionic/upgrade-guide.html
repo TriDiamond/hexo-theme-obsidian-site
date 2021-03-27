@@ -1,0 +1,586 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IONIC 2 升级 3 教程 - 三钻 TriDiamond</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="升级步骤
+这一次的升级Ionic 3 换成了使用最新的Angular 4.0, 最新的TypeScript, 添加了懒加载和修复了一些组件的bug.
+
+
+首先更新package.json, 按照以下,"> 
+    <meta name="author" content="三钻"> 
+    <link rel="alternative" href="atom.xml" title="三钻 TriDiamond" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">三钻 TriDiamond</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://tridiamond.tech">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">IONIC 2 升级 3 教程</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(https://res.cloudinary.com/tridiamond/image/upload/v1571186961/blog/ionic_cover_hvzkwo.png) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Ionic"><b>「
+                    </b>IONIC<b> 」</b></a>
+                
+                四月 10, 2017
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/post/ionic/upgrade-guide.html" title="IONIC 2 升级 3 教程" class="">IONIC 2 升级 3 教程</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                    19k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                    17 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Angular-4/" rel="tag">Angular 4</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Hybird-App/" rel="tag">Hybird App</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Ionic-3/" rel="tag">Ionic 3</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s">这一次的升级Ionic 3 换成了使用最新的Angular 4.0, 最新的TypeScript, 添加了懒加载和修复了一些组件的bug.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <h2 id="升级步骤"><a href="#升级步骤" class="headerlink" title="升级步骤"></a>升级步骤</h2><blockquote>
+<p>这一次的升级Ionic 3 换成了使用最新的Angular 4.0, 最新的TypeScript, 添加了懒加载和修复了一些组件的bug.</p>
+</blockquote>
+<ol>
+<li>首先更新<code>package.json</code>, 按照以下的代码相应替换你package.json里面的代码, 并且把你项目根目录下的<code>node_modules</code>文件夹删除掉, 然后运行<code>npm install</code> (如果你是用淘宝镜像可以运行 <code>cnpm install</code>)</li>
+</ol>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token property">"dependencies"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">"@angular/common"</span><span class="token operator">:</span> <span class="token string">"4.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"@angular/compiler"</span><span class="token operator">:</span> <span class="token string">"4.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"@angular/compiler-cli"</span><span class="token operator">:</span> <span class="token string">"4.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"@angular/core"</span><span class="token operator">:</span> <span class="token string">"4.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"@angular/forms"</span><span class="token operator">:</span> <span class="token string">"4.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"@angular/http"</span><span class="token operator">:</span> <span class="token string">"4.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"@angular/platform-browser"</span><span class="token operator">:</span> <span class="token string">"4.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"@angular/platform-browser-dynamic"</span><span class="token operator">:</span> <span class="token string">"4.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"@ionic-native/core"</span><span class="token operator">:</span> <span class="token string">"3.4.2"</span><span class="token punctuation">,</span>
+    <span class="token property">"@ionic-native/splash-screen"</span><span class="token operator">:</span> <span class="token string">"3.4.2"</span><span class="token punctuation">,</span>
+    <span class="token property">"@ionic-native/status-bar"</span><span class="token operator">:</span> <span class="token string">"3.4.2"</span><span class="token punctuation">,</span>
+    <span class="token property">"@ionic/storage"</span><span class="token operator">:</span> <span class="token string">"2.0.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"ionic-angular"</span><span class="token operator">:</span> <span class="token string">"3.0.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"ionicons"</span><span class="token operator">:</span> <span class="token string">"3.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"rxjs"</span><span class="token operator">:</span> <span class="token string">"5.1.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"sw-toolbox"</span><span class="token operator">:</span> <span class="token string">"3.4.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"zone.js"</span><span class="token operator">:</span> <span class="token string">"^0.8.4"</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token property">"devDependencies"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">"@ionic/app-scripts"</span><span class="token operator">:</span> <span class="token string">"1.3.0"</span><span class="token punctuation">,</span>
+  <span class="token property">"typescript"</span><span class="token operator">:</span> <span class="token string">"~2.2.1"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>第二步你需要在<code>app/app.module.ts</code>文件里面引入<code>BrowserModule</code>和<code>HttpModule</code></li>
+</ol>
+<blockquote>
+<p>首先需要在头部引入这两个module (如果你的APP不使用HTTP可以不引入<code>HttpModule</code>)</p>
+</blockquote>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> BrowserModule <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@angular/platform-browser'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> HttpModule <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@angular/http'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>在同一个文件里面找到<code>imports</code>并且加入<code>BrowserModule</code>和<code>HttpModule</code></p>
+</blockquote>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript">imports<span class="token operator">:</span> <span class="token punctuation">[</span>
+  BrowserModule<span class="token punctuation">,</span>
+  HttpModule<span class="token punctuation">,</span>
+  IonicModule<span class="token punctuation">.</span><span class="token function">forRoot</span><span class="token punctuation">(</span>MyApp<span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="3">
+<li>如果你升级到 Ionic Native 3.x, 就是CLI3. 使用 Ionic Native 3.x的话, APP打包出来会更小. 因为Ionic Native的原生插件都不自带有了, 你使用一个就要安装一个. 如果你原有的Ionic 2 项目有引入原生插件, 你就要做以下操作.</li>
+</ol>
+<blockquote>
+<p>这里用<code>Camera</code>和<code>Geolocation</code>这个两个原生插件作为例子, 你其他的插件都需要使用相同的方式做修改</p>
+</blockquote>
+<blockquote>
+<p>注意您使用的所有插件都必须要在<code>app/app.module.ts</code>里面先引用了, 而且要在<code>app/app.modules.ts</code>里面的providers里面声明, 如果没有这样配置就会出现<code>No provider for XXXXX</code>这样的报错了!</p>
+</blockquote>
+<h4 id="Camera插件"><a href="#Camera插件" class="headerlink" title="Camera插件"></a>Camera插件</h4><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// 在app/app.module.ts文件里面</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Camera <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@ionic-native/camera'</span><span class="token punctuation">;</span>
+
+<span class="token operator">...</span>
+
+@<span class="token function">NgModule</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token operator">...</span>
+
+  providers<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token operator">...</span>
+    Camera
+    <span class="token operator">...</span>
+  <span class="token punctuation">]</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppModule</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="Geolocation插件"><a href="#Geolocation插件" class="headerlink" title="Geolocation插件"></a>Geolocation插件</h4><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// 在app/app.module.ts文件里面</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Geolocation <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@ionic-native/geolocation'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Platform <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'ionic-angular'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> NgZone <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyComponent</span> <span class="token punctuation">&#123;</span>
+
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> geolocation<span class="token operator">:</span> Geolocation<span class="token punctuation">,</span> <span class="token keyword">private</span> platform<span class="token operator">:</span> Platform<span class="token punctuation">,</span> <span class="token keyword">private</span> ngZone<span class="token operator">:</span> NgZone<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+    platform<span class="token punctuation">.</span><span class="token function">ready</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+
+      <span class="token comment">// get position</span>
+      geolocation<span class="token punctuation">.</span><span class="token function">getCurrentPosition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>pos <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">lat: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>pos<span class="token punctuation">.</span>coords<span class="token punctuation">.</span>latitude<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">, lon: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>pos<span class="token punctuation">.</span>coords<span class="token punctuation">.</span>longitude<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+      <span class="token comment">// watch position</span>
+      <span class="token keyword">const</span> watch <span class="token operator">=</span> geolocation<span class="token punctuation">.</span><span class="token function">watchPosition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>pos <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">lat: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>pos<span class="token punctuation">.</span>coords<span class="token punctuation">.</span>latitude<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">, lon: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>pos<span class="token punctuation">.</span>coords<span class="token punctuation">.</span>longitude<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+
+        <span class="token comment">// Currently, observables from Ionic Native plugins</span>
+        <span class="token comment">// need to run inside of zone to trigger change detection</span>
+        ngZone<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>position <span class="token operator">=</span> pos<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token comment">// to stop watching</span>
+      watch<span class="token punctuation">.</span><span class="token function">unsubscribe</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>更详细的文档可以参考官方的修改日记 <a target="_blank" rel="noopener" href="https://github.com/driftyco/ionic-native/blob/master/README.md">https://github.com/driftyco/ionic-native/blob/master/README.md</a></p>
+</blockquote>
+<h2 id="组件Component更变"><a href="#组件Component更变" class="headerlink" title="组件Component更变"></a>组件<code>Component</code>更变</h2><h4 id="新网格"><a href="#新网格" class="headerlink" title="新网格"></a>新网格</h4><blockquote>
+<p>旧的网格体系已经废除, 新的网格组件请参考官方文档 <a target="_blank" rel="noopener" href="http://blog.ionic.io/build-awesome-desktop-apps-with-ionics-new-responsive-grid/">http://blog.ionic.io/build-awesome-desktop-apps-with-ionics-new-responsive-grid/</a></p>
+</blockquote>
+<h4 id="标签的color属性更变"><a href="#标签的color属性更变" class="headerlink" title="标签的color属性更变"></a>标签的<code>color</code>属性更变</h4><blockquote>
+<p>以下标签的<code>color</code>属性在新的版本里面会不起效果了, 现在必须要使用<code>ion-text</code>才会起效果, 详细说明请看官方文档 <a target="_blank" rel="noopener" href="http://ionicframework.com/docs/api/components/typography/Typography/">http://ionicframework.com/docs/api/components/typography/Typography/</a></p>
+</blockquote>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css">h1[color]<span class="token punctuation">,</span> h2[color]<span class="token punctuation">,</span> h3[color]<span class="token punctuation">,</span> h4[color]<span class="token punctuation">,</span> h5[color]<span class="token punctuation">,</span> h6[color]<span class="token punctuation">,</span> a[color]<span class="token punctuation">:</span><span class="token function">not</span><span class="token punctuation">(</span>[ion-button]<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">not</span><span class="token punctuation">(</span>[ion-item]<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">not</span><span class="token punctuation">(</span>[ion-fab]<span class="token punctuation">)</span><span class="token punctuation">,</span> p[color]<span class="token punctuation">,</span> span[color]<span class="token punctuation">,</span> b[color]<span class="token punctuation">,</span> i[color]<span class="token punctuation">,</span> strong[color]<span class="token punctuation">,</span> em[color]<span class="token punctuation">,</span> small[color]<span class="token punctuation">,</span> sub[color]<span class="token punctuation">,</span> sup[color]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="Slides组件更变"><a href="#Slides组件更变" class="headerlink" title="Slides组件更变"></a>Slides组件更变</h4><blockquote>
+<p>以下的Slides属性和方法已经正式在新版本里面移除了</p>
+</blockquote>
+<ul>
+<li>Slides的input的<code>options</code>属性已经废除, 请使用标签的属性;</li>
+<li>Slide的事件<code>ionWillChange</code>方法已经废除, 请使用<code>ionSlideWillChange</code>;</li>
+<li>Slide的事件<code>ionDidChange</code>方法已经废除, 请使用<code>ionSlideDidChange</code>;</li>
+<li>Slide的事件<code>ionDrag</code>方法已经废除, 请使用<code>ionSlideDrag</code>;</li>
+<li>Slides的<code>getSlider()</code>方法已经废除, 请使用<code>ion-slides</code>实例;</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            <div class="post-nav">
+                <hr>
+                
+                    <div class="post-nav-item">上一篇:<a href="/post/ionic/ios-blackscreen-fix.html" rel="prev" 
+                        title="修复 Ionic 3.0.1 在IOS点击Tabs多次出现黑屏问题方法">修复 Ionic 3.0.1 在IOS点击Tabs多次出现黑屏问题方法
+                      </a></div>
+                
+                
+                    <div class="post-nav-item">下一篇:<a href="/post/ionic/comfirm-password-validators.html" rel="next" 
+                        title="IONIC 2 - 确认密码">IONIC 2 - 确认密码</a></div>
+                                
+            </div>   
+                        
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >留言</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>三钻</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/TriDiamond" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/TriDiamond6" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="https://stackoverflow.com/users/7602324/tridiamond?tab=profile" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">32 <p>文章</p></a></li>
+                    <li><a href="/categories">13 <p>分类</p></a></li>
+                    <li><a href="/tags">42 <p>标签</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>目录</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%87%E7%BA%A7%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.</span> <span class="toc-text">升级步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6Component%E6%9B%B4%E5%8F%98"><span class="toc-number">2.</span> <span class="toc-text">组件Component更变</span></a></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2021
+        <span class="gradient-text">
+            三钻
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.5" target="_blank" rel="noopener">v1.4.5</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+ 
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+ 
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+  
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+ 
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+ 
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+ 
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+ 
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+   
+<script src="/js/busuanzi.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    if ($('span[id^="busuanzi_"]').length) {
+      initialBusuanzi();
+    }
+  });
+</script>
+ 
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-149874671-1');
+</script>
+ 
+
+<script>
+  function initialTyped() {
+    var typedTextEl = $('.typed-text');
+    if (typedTextEl && typedTextEl.length > 0) {
+      var typed = new Typed('.typed-text', {
+        strings: ['Think like an artist, develop like an artisan', '艺术家思维去思考问题，工匠创造精神去开发'],
+        typeSpeed: 90,
+        loop: true,
+        loopCount: Infinity,
+        backSpeed: 20,
+      });
+    }
+  }
+
+  if ($('.article-header') && $('.article-header').length) {
+    $(document).ready(function () {
+      initialTyped();
+    });
+  }
+</script>
+
+
+
+
+ <!-- 例：百度统计 --> <script> var _hmt = _hmt || []; (function() { var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?your_code"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })(); </script> 
+
+</html>

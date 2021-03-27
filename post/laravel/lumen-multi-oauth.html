@@ -1,0 +1,580 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lumen passport实现多个用户体系下的oauth验证 - 三钻 TriDiamond</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="这个教程是基于, lumen里面已经安装好了lumen-passport的插件, 如果还没有的话可以先到lumen使用laravel passport教程先安装.
+改写Laravel Passpor,"> 
+    <meta name="author" content="三钻"> 
+    <link rel="alternative" href="atom.xml" title="三钻 TriDiamond" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">三钻 TriDiamond</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://tridiamond.tech">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">Lumen passport实现多个用户体系下的oauth验证</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(https://res.cloudinary.com/tridiamond/image/upload/v1571213684/blog/lumn_cover_uujop9.png) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Laravel"><b>「
+                    </b>LARAVEL<b> 」</b></a>
+                
+                一月 10, 2019
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/post/laravel/lumen-multi-oauth.html" title="Lumen passport实现多个用户体系下的oauth验证" class="">Lumen passport实现多个用户体系下的oauth验证</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                    20k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                    18 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Laravel-Passport/" rel="tag">Laravel Passport</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Lumen/" rel="tag">Lumen</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s">手把手教你在Lumen的Passport实现多个用户体系下使用多个Oauth验证</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <p>这个教程是基于, lumen里面已经安装好了lumen-passport的插件, 如果还没有的话可以先到<a href="/2019/01/10/2019-01-10-lumen-passport-usage/">lumen使用laravel passport教程</a>先安装.</p>
+<h2 id="改写Laravel-Passport里面的UserRepository"><a href="#改写Laravel-Passport里面的UserRepository" class="headerlink" title="改写Laravel Passport里面的UserRepository"></a>改写Laravel Passport里面的<code>UserRepository</code></h2><blockquote>
+<p>文件路径 <code>vendor\laravel\passport\src\Bridge\UserRepository.php</code></p>
+</blockquote>
+<ul>
+<li><p>首先需要改写<code>userRepositroy</code>里面的<code>getUserEntityByUserCredentials</code>方法</p>
+</li>
+<li><p>复制<code>userRepositroy</code>里面的<code>getUserEntityByUserCredentials</code>方法, 改名为<code>getEntityByUserCredentials</code></p>
+</li>
+<li><p>在新建的方法里面找到一下代码</p>
+</li>
+</ul>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$provider</span> <span class="token operator">=</span> <span class="token function">config</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'auth.guards.api.provider'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>改成一下样子</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$provider</span> <span class="token operator">=</span> <span class="token function">config</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'auth.guards.'</span><span class="token operator">.</span><span class="token variable">$provider</span><span class="token operator">.</span><span class="token string single-quoted-string">'.provider'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>然后在新的方法<code>getEntityByUserCredentials</code>的参数里面添加新的参数<code>$provider</code></li>
+</ul>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">getEntityByUserCredentials</span><span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">,</span> <span class="token variable">$password</span><span class="token punctuation">,</span> <span class="token variable">$grantType</span><span class="token punctuation">,</span> 
+  <span class="token class-name type-declaration">ClientEntityInterface</span> <span class="token variable">$clientEntity</span><span class="token punctuation">,</span> <span class="token variable">$provider</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">//...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="修改oauth2-server里面的PasswordGrand"><a href="#修改oauth2-server里面的PasswordGrand" class="headerlink" title="修改oauth2-server里面的PasswordGrand"></a>修改oauth2-server里面的PasswordGrand</h2><blockquote>
+<p>文件路径 <code>vendor\league\oauth2-server\src\Grant\PasswordGrant.php</code></p>
+</blockquote>
+<ul>
+<li>修改<code>validateUser</code>方法里面的这一串代码:</li>
+</ul>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$user</span> <span class="token operator">=</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">userRepository</span><span class="token operator">-></span><span class="token function">getEntityByUserCredentials</span><span class="token punctuation">(</span>
+    <span class="token variable">$username</span><span class="token punctuation">,</span>
+    <span class="token variable">$password</span><span class="token punctuation">,</span>
+    <span class="token variable">$this</span><span class="token operator">-></span><span class="token function">getIdentifier</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token variable">$client</span><span class="token punctuation">,</span>
+    <span class="token variable">$provider</span> <span class="token comment">// 新加的provider字段</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>在同一个方法里面加入新参数的获取</li>
+</ul>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$provider</span> <span class="token operator">=</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token function">getRequestParameter</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'provider'</span><span class="token punctuation">,</span> <span class="token variable">$request</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">is_null</span><span class="token punctuation">(</span><span class="token variable">$provider</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">throw</span> <span class="token class-name static-context">OAuthServerException</span><span class="token operator">::</span><span class="token function">invalidRequest</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'provider'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="在auth-php配置里面加入新的guard"><a href="#在auth-php配置里面加入新的guard" class="headerlink" title="在auth.php配置里面加入新的guard"></a>在auth.php配置里面加入新的guard</h2><p>首先需要加入新的guard配置</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token string single-quoted-string">'guards'</span> <span class="token operator">=></span> <span class="token punctuation">[</span>
+    <span class="token comment">// 原有的api guard</span>
+    <span class="token string single-quoted-string">'api'</span> <span class="token operator">=></span> <span class="token punctuation">[</span>
+        <span class="token string single-quoted-string">'driver'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'passport'</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'provider'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'users'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">// 新加的admin-api guard</span>
+    <span class="token string single-quoted-string">'admin-api'</span> <span class="token operator">=></span> <span class="token punctuation">[</span>
+        <span class="token string single-quoted-string">'driver'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'passport'</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'provider'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'admins'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>添加新<code>admin-api</code> guard的provider</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token string single-quoted-string">'providers'</span> <span class="token operator">=></span> <span class="token punctuation">[</span>
+    <span class="token string single-quoted-string">'users'</span> <span class="token operator">=></span> <span class="token punctuation">[</span>
+        <span class="token string single-quoted-string">'driver'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'eloquent'</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'model'</span> <span class="token operator">=></span> <span class="token class-name class-name-fully-qualified static-context"><span class="token punctuation">\</span>App<span class="token punctuation">\</span>Models<span class="token punctuation">\</span>General<span class="token punctuation">\</span>MemberLogin</span><span class="token operator">::</span><span class="token keyword">class</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment">// 新加的admins provider对应不用的用户模型</span>
+    <span class="token string single-quoted-string">'admins'</span> <span class="token operator">=></span> <span class="token punctuation">[</span>
+        <span class="token string single-quoted-string">'driver'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'eloquent'</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'model'</span> <span class="token operator">=></span> <span class="token class-name class-name-fully-qualified static-context"><span class="token punctuation">\</span>App<span class="token punctuation">\</span>Models<span class="token punctuation">\</span>Backend<span class="token punctuation">\</span>Manager</span><span class="token operator">::</span><span class="token keyword">class</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="路由middleware使用"><a href="#路由middleware使用" class="headerlink" title="路由middleware使用"></a>路由middleware使用</h2><p>区别在于middleware, 上文加入的新<code>admin-api</code>guard, 在新的路由里面就可以使用<code>auth:admin-api</code>的权限验证中间件理实现权限控制了!</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">/*
+|--------------------------------------------------------------------------
+| Admin API版本 v1 路由
+|--------------------------------------------------------------------------.
+|
+| prefix admin/api/api版本号
+| namespace Api\api版本号
+|
+*/</span>
+<span class="token variable">$app</span><span class="token operator">-></span><span class="token function">group</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'prefix'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'admin/api/v1'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'namespace'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'AdminApi\V1'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token variable">$app</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token comment">// ================ 不受登录权限控制的接口路由 ================ //</span>
+    <span class="token comment">//测试</span>
+    <span class="token variable">$app</span><span class="token operator">-></span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'test'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'ExampleController@test'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// ================ 受登录权限控制的接口路由 ================ //</span>
+    <span class="token variable">$app</span><span class="token operator">-></span><span class="token function">group</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'middleware'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'auth:admin-api'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token variable">$app</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//测试</span>
+        <span class="token variable">$app</span><span class="token operator">-></span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'test2'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token string single-quoted-string">'oauth test'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//测试</span>
+        <span class="token variable">$app</span><span class="token operator">-></span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'test3'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'ExampleController@test'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>使用了多个guard的时候, 在使用laravel默认的<code>$request-&gt;user()</code>, 这个方法默认是使用<code>api</code>guard的, 可以在<code>auth.php</code>配置里面看到默认guard的配置.</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">/*
+|--------------------------------------------------------------------------
+| Authentication Defaults
+|--------------------------------------------------------------------------
+|
+| This option controls the default authentication "guard" and password
+| reset options for your application. You may change these defaults
+| as required, but they're a perfect start for most applications.
+|
+*/</span>
+
+<span class="token string single-quoted-string">'defaults'</span> <span class="token operator">=></span> <span class="token punctuation">[</span>
+    <span class="token string single-quoted-string">'guard'</span> <span class="token operator">=></span> <span class="token function">env</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'AUTH_GUARD'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'api'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string single-quoted-string">'passwords'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'users'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>所以在使用新的<code>admin-api</code> guard的时候在使用<code>$request-&gt;user()</code>时需要加入对应的guard. 例子:</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">namespace</span> <span class="token package">App<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Controllers<span class="token punctuation">\</span>AdminApi<span class="token punctuation">\</span>V1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Controllers<span class="token punctuation">\</span>Controller</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Http<span class="token punctuation">\</span>Request</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Facades<span class="token punctuation">\</span>Cache</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ExampleController</span> <span class="token keyword">extends</span> <span class="token class-name">Controller</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name type-declaration">Request</span> <span class="token variable">$request</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token variable">$request</span><span class="token operator">-></span><span class="token function">user</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'admin-api'</span><span class="token punctuation">)</span><span class="token operator">-></span><span class="token function">toArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取到admin-api下的用户信息</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            <div class="post-nav">
+                <hr>
+                
+                    <div class="post-nav-item">上一篇:<a href="/post/laravel/lumen-passport-usage.html" rel="prev" 
+                        title="Lumen 使用 laravel passport">Lumen 使用 laravel passport
+                      </a></div>
+                
+                
+                    <div class="post-nav-item">下一篇:<a href="/post/ionic/listen-to-back-button.html" rel="next" 
+                        title="IONIC 2 实现首页双击退出APP">IONIC 2 实现首页双击退出APP</a></div>
+                                
+            </div>   
+                        
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >留言</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>三钻</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/TriDiamond" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/TriDiamond6" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="https://stackoverflow.com/users/7602324/tridiamond?tab=profile" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">32 <p>文章</p></a></li>
+                    <li><a href="/categories">13 <p>分类</p></a></li>
+                    <li><a href="/tags">42 <p>标签</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>目录</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B9%E5%86%99Laravel-Passport%E9%87%8C%E9%9D%A2%E7%9A%84UserRepository"><span class="toc-number">1.</span> <span class="toc-text">改写Laravel Passport里面的UserRepository</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9oauth2-server%E9%87%8C%E9%9D%A2%E7%9A%84PasswordGrand"><span class="toc-number">2.</span> <span class="toc-text">修改oauth2-server里面的PasswordGrand</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8auth-php%E9%85%8D%E7%BD%AE%E9%87%8C%E9%9D%A2%E5%8A%A0%E5%85%A5%E6%96%B0%E7%9A%84guard"><span class="toc-number">3.</span> <span class="toc-text">在auth.php配置里面加入新的guard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1middleware%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">路由middleware使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">5.</span> <span class="toc-text">注意事项</span></a></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2021
+        <span class="gradient-text">
+            三钻
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.5" target="_blank" rel="noopener">v1.4.5</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+ 
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+ 
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+  
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+ 
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+ 
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+ 
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+ 
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+  
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+   
+<script src="/js/busuanzi.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    if ($('span[id^="busuanzi_"]').length) {
+      initialBusuanzi();
+    }
+  });
+</script>
+ 
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-149874671-1');
+</script>
+ 
+
+<script>
+  function initialTyped() {
+    var typedTextEl = $('.typed-text');
+    if (typedTextEl && typedTextEl.length > 0) {
+      var typed = new Typed('.typed-text', {
+        strings: ['Think like an artist, develop like an artisan', '艺术家思维去思考问题，工匠创造精神去开发'],
+        typeSpeed: 90,
+        loop: true,
+        loopCount: Infinity,
+        backSpeed: 20,
+      });
+    }
+  }
+
+  if ($('.article-header') && $('.article-header').length) {
+    $(document).ready(function () {
+      initialTyped();
+    });
+  }
+</script>
+
+
+
+
+ <!-- 例：百度统计 --> <script> var _hmt = _hmt || []; (function() { var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?your_code"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })(); </script> 
+
+</html>
